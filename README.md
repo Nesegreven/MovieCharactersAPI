@@ -106,7 +106,7 @@ This provides a complete API reference with examples and the ability to test end
 
 ## Authors
 
-- [Your Name]
+- Simen Bergh
 
 ## License
 

@@ -17,8 +17,7 @@ These instructions will help you get a copy of the project up and running on you
 
 1. **Clone the Repository**
    ```bash
-   git clone [your-repository-url]
-   cd MovieCharactersAPI
+   git clone [(https://github.com/Nesegreven/MovieCharactersAPI.git)
    ```
 
 2. **Check Database Connection String**

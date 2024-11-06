@@ -76,19 +76,6 @@ This provides a complete API reference with examples and the ability to test end
 - `Services/` - Business logic
 - `Middleware/` - Custom middleware (error handling, etc.)
 
-## Common Issues
-
-1. **Database Connection**
-   - Ensure SQL Server Express is running
-   - Verify the connection string in appsettings.json
-   - Make sure you have necessary permissions
-
-2. **Missing Data**
-   - If no data appears, try stopping the application
-   - Delete the database in SQL Server
-   - Run `Update-Database` again
-   - Restart the application
-
 ## Development Notes
 
 - HTTP is used instead of HTTPS for development simplicity

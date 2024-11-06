@@ -1,8 +1,14 @@
+# Prevent the window from closing immediately if run directly
+if ($Host.Name -eq "ConsoleHost") {
+    $wasWindowsTerminal = $env:WT_SESSION
+}
+
 # Test script for Movie Characters API
 $baseUrl = "http://localhost:5000/api"
 $successColor = "Green"
 $errorColor = "Red"
 $infoColor = "Yellow"
+$dataColor = "Cyan"
 
 # Store IDs of created test entities for cleanup
 $testEntities = @{
@@ -18,6 +24,16 @@ function Write-TestHeader {
     Write-Host "`n=== $title ===" -ForegroundColor $infoColor
 }
 
+function Write-JsonResponse {
+    param (
+        [object]$response
+    )
+    if ($response) {
+        Write-Host "Response:" -ForegroundColor $dataColor
+        Write-Host ($response | ConvertTo-Json -Depth 10) -ForegroundColor $dataColor
+    }
+}
+
 function Test-Endpoint {
     param (
         [string]$name,
@@ -28,7 +44,7 @@ function Test-Endpoint {
     )
     
     try {
-        Write-Host "Testing: $name... " -NoNewline
+        Write-Host "`nTesting: $name... " -NoNewline
 
         $params = @{
             Method = $method
@@ -39,6 +55,8 @@ function Test-Endpoint {
 
         if ($body -and $method -ne "DELETE") {
             $params.Body = ($body | ConvertTo-Json)
+            Write-Host "`nRequest Body:" -ForegroundColor $dataColor
+            Write-Host ($body | ConvertTo-Json) -ForegroundColor $dataColor
         }
 
         if ($method -eq "DELETE") {
@@ -56,6 +74,7 @@ function Test-Endpoint {
         else {
             $response = Invoke-RestMethod @params
             Write-Host "OK" -ForegroundColor $successColor
+            Write-JsonResponse $response
 
             if ($expectedResponse.Count -gt 0) {
                 foreach ($key in $expectedResponse.Keys) {
@@ -71,6 +90,9 @@ function Test-Endpoint {
     catch {
         Write-Host "Failed" -ForegroundColor $errorColor
         Write-Host "  Error: $($_.Exception.Message)" -ForegroundColor $errorColor
+        if ($_.ErrorDetails) {
+            Write-Host "  Details: $($_.ErrorDetails)" -ForegroundColor $errorColor
+        }
         return $null
     }
 }
@@ -95,7 +117,7 @@ function Clean-TestData {
 }
 
 # Main test script
-Write-Host "Starting API Test Suite" -ForegroundColor $infoColor
+Write-TestHeader "Starting API Test Suite"
 Write-Host "Base URL: $baseUrl" -ForegroundColor $infoColor
 
 # Test Franchises
@@ -215,3 +237,9 @@ if ($characters) {
 Clean-TestData
 
 Write-Host "`nTest Suite Completed!" -ForegroundColor $successColor
+
+# Keep window open
+if ($Host.Name -eq "ConsoleHost" -and -not $wasWindowsTerminal) {
+    Write-Host "`nPress any key to exit..." -ForegroundColor $infoColor
+    $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+}

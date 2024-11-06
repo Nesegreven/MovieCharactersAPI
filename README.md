@@ -43,16 +43,31 @@ These instructions will help you get a copy of the project up and running on you
    - The database will be seeded with initial data on the first run
    - Swagger UI will open automatically at `http://localhost:5000/swagger`
 
+### Demo
+![API Running Demo](./demo-running.png)
+
 ### Initial Data (Seeding)
 
 On first run, the database will be seeded with:
-- Two franchises (Marvel Cinematic Universe, The Lord of the Rings)
-- Several characters (Iron Man, Thor, Frodo, Gandalf, etc.)
-- Four movies (Iron Man and the LOTR trilogy)
+- Two franchises:
+  * Marvel Cinematic Universe
+  * The Lord of the Rings
+- Several characters:
+  * Tony Stark (Iron Man)
+  * Thor Odinson
+  * Frodo Baggins
+  * Gandalf
+  * Aragorn
+  * Legolas
+  * Samwise Gamgee
+- Four movies:
+  * Iron Man
+  * The Lord of the Rings trilogy:
+    - The Fellowship of the Ring
+    - The Two Towers
+    - The Return of the King
 
-The seeding occurs automatically when you first run the application - no additional steps required.
-
-### API Documentation
+## API Documentation
 
 Once running, you can access the Swagger documentation at:
 - http://localhost:5000/swagger
@@ -104,8 +119,8 @@ This provides a complete API reference with examples and the ability to test end
 
 ## Authors
 
-- Simen Bergh
+- [Your Name]
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

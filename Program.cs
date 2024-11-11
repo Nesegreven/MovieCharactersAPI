@@ -34,8 +34,8 @@ builder.Services.AddSwaggerGen(options =>
         Description = "An API to manage movie characters, movies, and franchises",
         Contact = new Microsoft.OpenApi.Models.OpenApiContact
         {
-            Name = "Your Name",
-            Email = "your.email@example.com"
+            Name = "Simen Bergh",
+            Email = "donotreply@example.com"
         }
     });
 
